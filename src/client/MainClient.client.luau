@@ -11,10 +11,12 @@ local HatchClient = StarterPlayerScripts:WaitForChild("HatchClient")
 local ToolController = require(HatchClient.Controllers.ToolController)
 local JournalUI      = require(HatchClient.Controllers.JournalUI)
 local AmbienceFX     = require(HatchClient.Controllers.AmbienceFX)
+local UIController   = require(HatchClient.Controllers.UIController)
 
 -- Init semua controller
 ToolController.Init()
 JournalUI.Init()
 AmbienceFX.Init()
+UIController.Init(ToolController, JournalUI)
 
 print("[HATCH Client] Semua controller aktif untuk", player.Name)
