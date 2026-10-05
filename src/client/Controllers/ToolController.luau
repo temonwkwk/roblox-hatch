@@ -129,7 +129,13 @@ function ToolController.Init()
 	end)
 
 	-- Dengar balasan server soal hasil penggunaan alat
-	-- (Server FireClient dari UseToolAction handler di RoundManager)
+	Remotes.Events.UseToolAction.OnClientEvent:Connect(function(toolId: string, evidence: string)
+		onToolResult(toolId, evidence)
+		-- Otomatis masukkan bukti valid ke Journal tablet
+		local JournalUI = require(script.Parent.JournalUI)
+		JournalUI.AddEvidence(evidence)
+	end)
+
 	print("[ToolController] Diinisialisasi. Tekan 1-6 untuk equip, E untuk gunakan.")
 end
 
