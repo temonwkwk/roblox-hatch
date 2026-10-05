@@ -111,8 +111,6 @@ local keyMap: { [Enum.KeyCode]: number } = {
 function ToolController.Init()
 	-- Input shortcut keyboard
 	UserInputService.InputBegan:Connect(function(input: InputObject, gameProcessed: boolean)
-		if gameProcessed then return end
-
 		-- Equip via angka 1-6
 		local slot = keyMap[input.KeyCode]
 		if slot and toolSlots[slot] then
@@ -135,6 +133,9 @@ function ToolController.Init()
 		local JournalUI = require(script.Parent.JournalUI)
 		JournalUI.AddEvidence(evidence)
 	end)
+
+	-- Default equip alat pertama (Thermometer) saat game dimulai
+	ToolController.Equip("Thermometer")
 
 	print("[ToolController] Diinisialisasi. Tekan 1-6 untuk equip, E untuk gunakan.")
 end

@@ -204,6 +204,22 @@ function UIController.Init(toolController: any, journalUI: any)
 	hintLabel.Text = "Tekan [E] untuk gunakan alat · Tekan [J] untuk buka Jurnal Deduksi"
 	hintLabel.Parent = screenGui
 
+	-- Tombol buka jurnal interaktif (bisa diklik mouse selain tekan J)
+	local openJournalBtn = Instance.new("TextButton")
+	openJournalBtn.Name = "OpenJournalBtn"
+	openJournalBtn.Size = UDim2.new(0, 150, 0, 36)
+	openJournalBtn.Position = UDim2.new(0, 20, 1, -65)
+	openJournalBtn.BackgroundColor3 = Color3.fromRGB(26, 127, 170)
+	openJournalBtn.Font = Enum.Font.GothamBold
+	openJournalBtn.TextSize = 12
+	openJournalBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	openJournalBtn.Text = "📋 JURNAL [J]"
+	openJournalBtn.Parent = screenGui
+
+	local cornerOpenJ = Instance.new("UICorner")
+	cornerOpenJ.CornerRadius = UDim.new(0, 8)
+	cornerOpenJ.Parent = openJournalBtn
+
 	-- 6. Jurnal Deduksi / Tablet (Modal Dialog)
 	local journalModal = Instance.new("Frame")
 	journalModal.Name = "JournalModal"
@@ -329,14 +345,19 @@ function UIController.Init(toolController: any, journalUI: any)
 	end)
 
 	-- Shortcut Toggle Jurnal dengan tombol J
+	local function toggleJournal()
+		isJournalOpen = not isJournalOpen
+		journalModal.Visible = isJournalOpen
+		if isJournalOpen then
+			refreshJournalContent()
+		end
+	end
+
+	openJournalBtn.MouseButton1Click:Connect(toggleJournal)
+
 	UserInputService.InputBegan:Connect(function(input, gameProcessed)
-		if gameProcessed then return end
 		if input.KeyCode == Enum.KeyCode.J then
-			isJournalOpen = not isJournalOpen
-			journalModal.Visible = isJournalOpen
-			if isJournalOpen then
-				refreshJournalContent()
-			end
+			toggleJournal()
 		end
 	end)
 
