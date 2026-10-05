@@ -8,11 +8,15 @@
       }
     },
     "ServerScriptService": {
-      "$path": "src/server"
+      "HatchServer": {
+        "$path": "src/server"
+      }
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
-        "$path": "src/client"
+        "HatchClient": {
+          "$path": "src/client"
+        }
       }
     }
   }

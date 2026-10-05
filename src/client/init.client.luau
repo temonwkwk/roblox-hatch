@@ -6,11 +6,11 @@ local player = Players.LocalPlayer
 
 -- Tunggu map selesai dimuat
 local StarterPlayerScripts = player:WaitForChild("PlayerScripts")
-local Client = StarterPlayerScripts:WaitForChild("Client")
+local HatchClient = StarterPlayerScripts:WaitForChild("HatchClient")
 
-local ToolController = require(Client.Controllers.ToolController)
-local JournalUI      = require(Client.Controllers.JournalUI)
-local AmbienceFX     = require(Client.Controllers.AmbienceFX)
+local ToolController = require(HatchClient.Controllers.ToolController)
+local JournalUI      = require(HatchClient.Controllers.JournalUI)
+local AmbienceFX     = require(HatchClient.Controllers.AmbienceFX)
 
 -- Init semua controller
 ToolController.Init()

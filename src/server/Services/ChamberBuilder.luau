@@ -4,6 +4,8 @@
 
 local Workspace = game:GetService("Workspace")
 
+local ChamberBuilder = {}
+
 local function createPart(name: string, size: Vector3, position: Vector3, color: Color3, material: Enum.Material): Part
 	local part = Instance.new("Part")
 	part.Name = name
@@ -18,7 +20,7 @@ local function createPart(name: string, size: Vector3, position: Vector3, color:
 	return part
 end
 
-local function buildChamber()
+function ChamberBuilder.Build()
 	-- Cegah duplikasi jika sudah pernah dibuat
 	if Workspace:FindFirstChild("ContainmentChamber") then
 		return
@@ -91,4 +93,4 @@ local function buildChamber()
 	print("[ChamberBuilder] Ruangan laboratorium & kubus dummy spesimen berhasil dibuat!")
 end
 
-buildChamber()
+return ChamberBuilder
