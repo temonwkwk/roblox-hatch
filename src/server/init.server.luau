@@ -3,6 +3,9 @@
 
 local ServerScriptService = game:GetService("ServerScriptService")
 
+-- Bangun ruangan dummy dan model spesimen di Workspace secara otomatis
+require(ServerScriptService.Server.Services.ChamberBuilder)
+
 local RoundManager = require(ServerScriptService.Server.Services.RoundManager)
 local PlayerData   = require(ServerScriptService.Server.Services.PlayerData)
 local EggService   = require(ServerScriptService.Server.Services.EggService)
