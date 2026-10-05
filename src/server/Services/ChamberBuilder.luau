@@ -86,20 +86,33 @@ function ChamberBuilder.Build()
 	light.Shadows = true
 	light.Parent = eggShell
 
-	-- 6. Titik Muncul Pemain (SpawnLocation) - Berjarak aman 26 stud dari kubus raksasa
-	local existingSpawn = chamberFolder:FindFirstChild("LabSpawnLocation") or Workspace:FindFirstChild("LabSpawnLocation")
-	if not existingSpawn then
-		local spawn = Instance.new("SpawnLocation")
+	-- 6. Titik Muncul Pemain (SpawnLocation) - Pasti berada DI DALAM ruangan
+	-- Nonaktifkan / hapus SpawnLocation bawaan template Studio yang ada di tanah luar
+	for _, obj in Workspace:GetChildren() do
+		if obj:IsA("SpawnLocation") and obj.Name ~= "LabSpawnLocation" then
+			obj.Enabled = false
+			obj.CanCollide = false
+			obj.Transparency = 1
+		end
+	end
+
+	local spawn = chamberFolder:FindFirstChild("LabSpawnLocation") :: SpawnLocation?
+	if not spawn then
+		spawn = Instance.new("SpawnLocation")
 		spawn.Name = "LabSpawnLocation"
-		spawn.Size = Vector3.new(8, 0.5, 8)
-		spawn.Position = Vector3.new(0, floorTopY + 0.25, 26)
-		spawn.Color = Color3.fromRGB(9, 132, 227)
-		spawn.Material = Enum.Material.Neon
-		spawn.Anchored = true
-		spawn.CanCollide = true
-		spawn.Duration = 0
 		spawn.Parent = chamberFolder
 	end
+
+	spawn.Size = Vector3.new(8, 1, 8)
+	-- Tempatkan tepat di atas lantai lab (Lantai top = floorTopY, spawn = floorTopY + 0.5)
+	spawn.Position = Vector3.new(0, floorTopY + 0.5, 24)
+	spawn.Color = Color3.fromRGB(9, 132, 227)
+	spawn.Material = Enum.Material.Neon
+	spawn.Anchored = true
+	spawn.CanCollide = true
+	spawn.Duration = 0
+	spawn.Enabled = true
+	spawn.Neutral = true
 
 	print("[ChamberBuilder] Ruangan laboratorium & kubus dummy spesimen berhasil dibuat!")
 end
