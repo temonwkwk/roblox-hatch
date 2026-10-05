@@ -2,9 +2,6 @@
   "name": "HATCH",
   "tree": {
     "$className": "DataModel",
-    "Workspace": {
-      "$path": "src/world"
-    },
     "ReplicatedStorage": {
       "Shared": {
         "$path": "src/shared"
